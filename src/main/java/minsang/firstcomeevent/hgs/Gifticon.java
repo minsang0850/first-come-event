@@ -1,4 +1,4 @@
-package minsang.firstcomeevent;
+package minsang.firstcomeevent.hgs;
 
 import lombok.Getter;
 

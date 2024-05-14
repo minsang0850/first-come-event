@@ -1,7 +1,5 @@
 package minsang.firstcomeevent.hgs;
 
-import minsang.firstcomeevent.Event;
-import minsang.firstcomeevent.CouponService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
