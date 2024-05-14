@@ -1,7 +1,7 @@
 package minsang.firstcomeevent.hgs;
 
 import minsang.firstcomeevent.Event;
-import minsang.firstcomeevent.GifticonService;
+import minsang.firstcomeevent.CouponService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class GifticonServiceTest {
+class CouponServiceTest {
 
     @Autowired
-    private GifticonService gifticonService;
+    private CouponService couponService;
 
     @Test
     void 선착순이벤트_100명에게_기프티콘_30개_제공() throws InterruptedException {
@@ -26,7 +26,7 @@ class GifticonServiceTest {
         final int limitCount = 30;
         final CountDownLatch countDownLatch = new CountDownLatch(people);
 
-        gifticonService.setEventCount(chickenEvent, limitCount);
+        couponService.setEventCount(chickenEvent, limitCount);
 
         List<Thread> workers = Stream
                 .generate(() -> new Thread(new AddQueueWorker(countDownLatch, chickenEvent)))
@@ -36,7 +36,7 @@ class GifticonServiceTest {
         countDownLatch.await();
         Thread.sleep(5000); // 기프티콘 발급 스케줄러 작업 시간
 
-        final long failEventPeople = gifticonService.getSize(chickenEvent);
+        final long failEventPeople = couponService.getSize(chickenEvent);
         assertEquals(people - limitCount, failEventPeople); // output : 70 = 100 - 30
     }
 
@@ -51,7 +51,7 @@ class GifticonServiceTest {
 
         @Override
         public void run() {
-            gifticonService.addQueue(event);
+            couponService.addQueue(event);
             countDownLatch.countDown();
         }
     }

@@ -10,7 +10,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class GifticonService {
+public class CouponService {
     private final RedisTemplate<String,String> redisTemplate;
     private static final long FIRST_ELEMENT = 0;
     private static final long LAST_ELEMENT = -1;

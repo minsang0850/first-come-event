@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class EventScheduler {
 
-    private final GifticonService gifticonService;
+    private final CouponService couponService;
 
     @Scheduled(fixedDelay = 1000)
     public void chickenEventScheduler(){
-        if(gifticonService.validEnd()){
+        if(couponService.validEnd()){
             log.info("===== 선착순 이벤트가 종료되었습니다. =====");
             return;
         }
         log.info("===== 스케줄러 가동 =====");
-        gifticonService.publish(Event.CHICKEN);
-        gifticonService.getOrder(Event.CHICKEN);
+        couponService.publish(Event.CHICKEN);
+        couponService.getOrder(Event.CHICKEN);
     }
 }
 
