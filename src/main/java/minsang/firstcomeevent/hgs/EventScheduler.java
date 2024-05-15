@@ -12,13 +12,12 @@ public class EventScheduler {
 
     private final CouponService couponService;
 
-    @Scheduled(fixedDelay = 1000)
+//    @Scheduled(fixedDelay = 1000)
     public void chickenEventScheduler(){
         if(couponService.validEnd()){
             log.info("===== 선착순 이벤트가 종료되었습니다. =====");
             return;
         }
-        log.info("===== 스케줄러 가동 =====");
         couponService.publish(Event.CHICKEN);
         couponService.getOrder(Event.CHICKEN);
     }
