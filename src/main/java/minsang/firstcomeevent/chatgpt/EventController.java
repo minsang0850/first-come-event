@@ -16,13 +16,13 @@ public class EventController {
     private final EventService eventService;
 
     @PostMapping("/initialize")
-    public ResponseEntity<String> initialize(@RequestParam int tickets) {
+    public ResponseEntity<String> initialize(@RequestParam("tickets") int tickets) {
         eventService.initializeTickets(tickets);
         return ResponseEntity.ok("Event initialized with " + tickets + " tickets.");
     }
 
     @PostMapping("/participate")
-    public ResponseEntity<String> participate(@RequestParam String userId) {
+    public ResponseEntity<String> participate(@RequestParam("userId") String userId) {
         boolean success = eventService.participate(userId);
         if (success) {
             return ResponseEntity.ok("Participation successful.");

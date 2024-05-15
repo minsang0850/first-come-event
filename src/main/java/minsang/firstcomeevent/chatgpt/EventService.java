@@ -12,6 +12,10 @@ public class EventService {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
+    public void initializeTickets(int numberOfTickets) {
+        redisTemplate.opsForValue().set(EVENT_KEY, numberOfTickets);
+    }
+
     public boolean participate(String userId) {
         Long remainingTickets = redisTemplate.opsForValue().decrement(EVENT_KEY);
 
@@ -22,10 +26,6 @@ public class EventService {
             redisTemplate.opsForValue().increment(EVENT_KEY);
             return false;
         }
-    }
-
-    public void initializeTickets(int numberOfTickets) {
-        redisTemplate.opsForValue().set(EVENT_KEY, numberOfTickets);
     }
 }
 
